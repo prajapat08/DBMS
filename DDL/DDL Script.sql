@@ -5,7 +5,7 @@ set search_path to project;
 CREATE TABLE operators(
 Name Varchar(50),
 Operator_ID int,
-Supervisor_Id int,
+Supervisor_ID int,
 Address Varchar(50),
 DOB date,
 SEX char(1),
