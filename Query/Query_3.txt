@@ -2,7 +2,7 @@ Q 1:
 select name_of_scheme from scheme as s join (select * from audits as a join (select o.operator_id from operators as o join (select * from districts natural join location where name='Khargone') as p on o.operator_id=p.supervisor_id) as q on a.audited_by=q.operator_id) as r on r.fund_scheme_code=s.scheme_code where launched_year='2014';
 
 Query 2:
-(select * from benefittedby as bb join (select i.enrollment_id,i.fname,i.mname,i.lname from individuals as i join(select enrollment_id from beneficiary as b join (select location_code from location  natural join districts where name='Khandwa') as p on (b.city_code=p.location_code)) as r on (i.enrollment_id=r.enrollment_id)) as q on bb.enrollment_id=q.enrollment_id  where bb.scheme_code='APY');
+  (select * from benefittedby as bb join (select i.enrollment_id,i.fname,i.mname,i.lname from individuals as i join(select enrollment_id from beneficiary as b join (select location_code from location  natural join districts where name='Khandwa') as p on (b.city_code=p.location_code)) as r on (i.enrollment_id=r.enrollment_id)) as q on bb.enrollment_id=q.enrollment_id  where bb.scheme_code='APY');
 
 Query 3:
 select * from scheme as s join (select Fund_scheme_code,q.Operator_Id from audits as a join (select  o.Operator_Id from operators as o join districts as d on (d.Manager_Id=o.Operator_Id)) as q on (q.Operator_Id=a.Audited_by)) as p on (p.Fund_scheme_code=s.scheme_code) where s.govt_id='JOINT' AND s.status='Y';
