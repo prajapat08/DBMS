@@ -1,4 +1,4 @@
-Q 1:
+Query 1:
 select name_of_scheme from scheme as s join (select * from audits as a join (select o.operator_id from operators as o join (select * from districts natural join location where name='Khargone') as p on o.operator_id=p.supervisor_id) as q on a.audited_by=q.operator_id) as r on r.fund_scheme_code=s.scheme_code where launched_year='2014';
 
 Query 2:
@@ -7,27 +7,27 @@ Query 2:
 Query 3:
 select * from scheme as s join (select Fund_scheme_code,q.Operator_Id from audits as a join (select  o.Operator_Id from operators as o join districts as d on (d.Manager_Id=o.Operator_Id)) as q on (q.Operator_Id=a.Audited_by)) as p on (p.Fund_scheme_code=s.scheme_code) where s.govt_id='JOINT' AND s.status='Y';
  
-Q 4:
+Query 4:
 select * from benefittedby as bb join (select enrollment_id from beneficiary as b join (select name,location_code from location as l join districts as d on l.District_Code=d.District_Code where d.name='Indore') as p on(p.location_code=b.city_code)) as q on bb.enrollment_id=q.enrollment_id where bb.fund_status='Y' AND scheme_code='PMKY'; 
  
-Q 5:
+Query 5:
 select count(i.enrollment_id) from individuals as i join (select enrollment_id from benefittedby as bb join (select scheme_code from scheme natural join sectors where name='Women Development') as q on (bb.scheme_code=q.scheme_code)) as p on (i.enrollment_id=p.enrollment_id);
 
-Q 6:
+Query 6:
 select count(*) from sectors natural join scheme where sector_code='Education';
  
 
-Q 7:
+Query 7:
 select count(enrollment_id) from benefittedby natural join (select * from beneficiary as b join (select * from districts natural join location where name='Bhopal') as p on b.city_code=p.location_code) as q where scheme_code='PMJAY';
 
 
-Q 8:
+Query 8:
  select * from operators as o join (select audited_by from audits as a join (select * from scheme as s join 
 (select * from sectors natural join ministries where ministry_code='MoHRD') as q on q.sector_code=s.sector_code) as p
 on a.fund_scheme_code=p.scheme_code) as r 
 on o.operator_id=r.audited_by;
 
-Q 9:
+Query 9:
 select count(*) from scheme as s join
 (select * from audits as a join
 (select o.operator_id from operators as o join (select * from districts natural join location where name='Khargone') as p 
@@ -36,6 +36,6 @@ on o.operator_id=p.supervisor_id) as q on a.audited_by=q.operator_id) as r on r.
 select p.district_code,count(b.enrollment_Id) from beneficiary as b join (select location_code,district_code from districts natural join location where (name='Khargone' OR name='Barwani' OR name='Indore')) as p on b.city_code=p.location_code group by district_code;
 
 
-Q10:
+Query 10:
 select s.sector_code from scheme as s natural join(select bb.scheme_code from benefittedby as bb natural join (select i.enrollment_id from individuals as i natural join (select b.enrollment_id from beneficiary as b join(select location_code from location natural join districts 
 where name='Khargone') as p on b.city_code=p.location_code) as q) as r) as q;
